@@ -9,7 +9,7 @@ export default function SafeScreen({
 }) {
   const insets = useSafeAreaInsets();
   return (
-    <View style={{ paddingTop: insets.top }} className="bg-background flex-1">
+    <View style={{ paddingTop: insets.top }} className="bg-background flex-1 ">
       {children}
     </View>
   );
