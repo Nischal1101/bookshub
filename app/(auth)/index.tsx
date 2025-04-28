@@ -1,8 +1,12 @@
 import AuthBtn from "@/components/auth-btn";
 import InputBox from "@/components/input-box";
+import loginSchema, { LoginSchema } from "@/validators/loginSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "expo-router";
 import React from "react";
+import { useForm } from "react-hook-form";
 import {
+  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -11,6 +15,29 @@ import {
 } from "react-native";
 
 export default function Login() {
+  const {
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  // Helper to handle custom InputBox
+  const handleInputChange = (name: keyof LoginSchema, value: string) => {
+    setValue(name, value, { shouldValidate: true });
+  };
+
+  const onSubmit = async (data: LoginSchema) => {
+    console.log(data);
+    /*
+    const result = await registerUser(data);
+    if (!result.success) {
+      Alert.alert(result.message || "Something went wrong");
+    }
+    console.log(result);
+    */
+  };
   return (
     <KeyboardAvoidingView
       className="flex-1"
@@ -28,12 +55,18 @@ export default function Login() {
             type="email"
             placeholder="Enter your email"
             icon="mail-outline"
+            onChangeText={(value: string) => handleInputChange("email", value)}
+            error={errors.email?.message}
           />
           <InputBox
             title="Password"
             type="password"
             placeholder="Enter your password"
             icon="lock-closed-outline"
+            onChangeText={(value: string) =>
+              handleInputChange("password", value)
+            }
+            error={errors.password?.message}
           />
           <AuthBtn
             title="Login"

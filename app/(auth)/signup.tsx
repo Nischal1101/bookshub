@@ -20,7 +20,6 @@ export default function Signup() {
   const { register: registerUser } = useAuthStore();
 
   const {
-    register,
     handleSubmit,
     setValue,
     formState: { errors, isSubmitting },
