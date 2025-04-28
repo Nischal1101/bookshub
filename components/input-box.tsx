@@ -7,11 +7,17 @@ export default function InputBox({
   type,
   placeholder,
   icon,
+  value,
+  onChangeText,
+  error,
 }: {
   title: string;
   type: string;
   placeholder: string;
   icon: any;
+  value?: string;
+  onChangeText?: (text: string) => void;
+  error?: string;
 }) {
   const [passwordVisible, setPasswordVisible] = React.useState(false);
   return (
@@ -42,7 +48,12 @@ export default function InputBox({
         keyboardType={type === "email" ? "email-address" : "default"}
         placeholder={placeholder}
         className="py-3 pl-10  pr-4 rounded-xl  border border-gray-200 text-placeholderText h-[48px]"
+        value={value}
+        onChangeText={onChangeText}
       />
+      {error && (
+        <Text className="text-red-500 text-xs mt-1 ml-2">{error}</Text>
+      )}
     </View>
   );
 }
