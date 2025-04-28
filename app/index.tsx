@@ -12,15 +12,18 @@ export default function Index() {
   return (
     <View className="flex-1 justify-center items-center">
       {user && (
-        <Text className="text-5xl text-primary">Hola {user.username}!</Text>
+        <>
+          <Text className="text-5xl text-primary">Hola {user.username}!</Text>
+          <TouchableOpacity
+            onPress={() => {
+              logout();
+            }}
+          >
+            <Text>Logout</Text>
+          </TouchableOpacity>
+        </>
       )}
-      <TouchableOpacity
-        onPress={() => {
-          logout();
-        }}
-      >
-        <Text>Logout</Text>
-      </TouchableOpacity>
+
       <Link href="/(auth)">Login</Link>
       <Link href="/(auth)/signup">Signup</Link>
     </View>

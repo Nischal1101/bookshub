@@ -1,5 +1,6 @@
 import AuthBtn from "@/components/auth-btn";
 import InputBox from "@/components/input-box";
+import { useAuthStore } from "@/store/authStore";
 import loginSchema, { LoginSchema } from "@/validators/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "expo-router";
@@ -15,6 +16,7 @@ import {
 } from "react-native";
 
 export default function Login() {
+  const { login } = useAuthStore();
   const {
     handleSubmit,
     setValue,
@@ -30,13 +32,10 @@ export default function Login() {
 
   const onSubmit = async (data: LoginSchema) => {
     console.log(data);
-    /*
-    const result = await registerUser(data);
+    const result = await login(data);
     if (!result.success) {
       Alert.alert(result.message || "Something went wrong");
     }
-    console.log(result);
-    */
   };
   return (
     <KeyboardAvoidingView
@@ -70,9 +69,8 @@ export default function Login() {
           />
           <AuthBtn
             title="Login"
-            onPress={() => {
-              console.log("Pressed");
-            }}
+            onPress={handleSubmit(onSubmit)}
+            disabled={isSubmitting}
           />
           <View className="mt-3">
             <Text className="text-textSecondary  mx-auto">

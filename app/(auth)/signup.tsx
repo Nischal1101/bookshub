@@ -86,7 +86,7 @@ export default function Signup() {
             error={errors.password?.message}
           />
           <AuthBtn
-            title={isSubmitting ? <ActivityIndicator /> : "Register"}
+            title={"Register"}
             onPress={handleSubmit(onSubmit)}
             disabled={isSubmitting}
           />
