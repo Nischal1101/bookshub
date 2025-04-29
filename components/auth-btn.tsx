@@ -1,21 +1,34 @@
 import { Text, TouchableOpacity, ActivityIndicator, View } from "react-native";
 import React from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function AuthBtn({
   title,
   onPress,
   disabled,
+  icon,
 }: {
   title: string | React.ReactNode;
   onPress: () => void;
   disabled?: boolean;
+  icon?: "cloud-upload-outline";
 }) {
   return (
     <TouchableOpacity onPress={onPress} className="mt-3" disabled={disabled}>
-      <View className=" justify-center items-center">
-        <Text className=" w-full text-white text-center font-medium py-3 rounded-xl bg-primary flex items-center justify-center">
-          {disabled ? <ActivityIndicator color="#ffffff" /> : title}
-        </Text>
+      <View className="w-full bg-primary rounded-xl py-3 flex-row items-center justify-center">
+        {icon && (
+          <Ionicons name={icon} size={24} className="mr-2" color="#fff" />
+        )}
+        {disabled ? (
+          <View className="flex-row items-center">
+            <ActivityIndicator color="#ffffff" />
+            <Text className="text-white ml-2">{title}</Text>
+          </View>
+        ) : (
+          <Text className="text-white text-center font-medium text-base">
+            {title}
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );
