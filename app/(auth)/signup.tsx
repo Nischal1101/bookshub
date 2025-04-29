@@ -46,7 +46,7 @@ export default function Signup() {
       className="flex-1"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View className="flex-1 px-4 justify-center">
+      <View className="flex-1 justify-center">
         <View className="bg-white rounded-2xl shadow-lg px-6 py-8 gap-3 border-[2px] border-border">
           <View className="gap-2">
             <View className="flex-row justify-center gap-1">

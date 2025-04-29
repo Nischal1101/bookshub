@@ -42,7 +42,7 @@ export default function Login() {
       className="flex-1"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View className="flex-1 px-4">
+      <View className="flex-1 ">
         <Image
           source={require("@/assets/images/flying-book.png")}
           className="mt-[100px] w-[400px] h-[300px] mx-auto"

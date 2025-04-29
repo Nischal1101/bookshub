@@ -5,6 +5,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import SafeScreen from "@/components/safe-screen";
 import { StatusBar } from "expo-status-bar";
 import { useAuthStore } from "@/store/authStore";
+import { View } from "react-native";
 
 export default function RootLayout() {
   const router = useRouter();

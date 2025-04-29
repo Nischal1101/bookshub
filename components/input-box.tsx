@@ -22,7 +22,7 @@ export default function InputBox({
   const [passwordVisible, setPasswordVisible] = React.useState(false);
   return (
     <View className="relative py-2">
-      <Text className="text-gray-600 font-medium mb-2">{title}</Text>
+      <Text className="text-textSecondary font-medium mb-2">{title}</Text>
       <Ionicons
         name={icon}
         size={20}
@@ -51,9 +51,7 @@ export default function InputBox({
         value={value}
         onChangeText={onChangeText}
       />
-      {error && (
-        <Text className="text-red-500 text-xs mt-1 ml-2">{error}</Text>
-      )}
+      {error && <Text className="text-red-500 text-xs mt-1 ml-2">{error}</Text>}
     </View>
   );
 }

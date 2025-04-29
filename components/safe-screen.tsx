@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -9,7 +9,7 @@ export default function SafeScreen({
 }) {
   const insets = useSafeAreaInsets();
   return (
-    <View style={{ paddingTop: insets.top }} className="bg-background flex-1 ">
+    <View style={{ paddingTop: insets.top }} className="flex-1 ">
       {children}
     </View>
   );
