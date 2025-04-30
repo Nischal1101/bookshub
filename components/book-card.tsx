@@ -11,6 +11,7 @@ export default function BookCard({ book }: { book: Book }) {
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <Ionicons
+          key={i}
           name={i <= rating ? "star" : "star-outline"}
           size={24}
           color={i <= rating ? "#f4b400" : "#688f68"}
