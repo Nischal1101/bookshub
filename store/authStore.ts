@@ -27,7 +27,7 @@ export const useAuthStore = create<UserState>()((set) => ({
     try {
       console.log("Users is", users);
       const response = await fetch(
-        "http://bookshub-backend.onrender.com/api/auth/register",
+        `${process.env.EXPO_PUBLIC_API_URL}/auth/register`,
         {
           method: "POST",
           headers: {
@@ -84,7 +84,7 @@ export const useAuthStore = create<UserState>()((set) => ({
     set({ isLoading: true });
     try {
       const response = await fetch(
-        "http://bookshub-backend.onrender.com/api/auth/login",
+        `${process.env.EXPO_PUBLIC_API_URL}/auth/login`,
         {
           method: "POST",
           headers: {

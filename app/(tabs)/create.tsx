@@ -54,22 +54,19 @@ export default function Create() {
         ? `image/${fileExtension.toLowerCase()}`
         : "image/jpeg";
       const imageDataUrl = `data:${imageType};base64,${imageBase64}`;
-      const response = await fetch(
-        "https://bookshub-backend.onrender.com/api/books",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: data.title,
-            caption: data.caption,
-            rating: data.rating.toString(),
-            image: imageDataUrl,
-          }),
-        }
-      );
+      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/books`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: data.title,
+          caption: data.caption,
+          rating: data.rating.toString(),
+          image: imageDataUrl,
+        }),
+      });
       const datas = await response.json();
       if (!response.ok) {
         console.log(datas.message);
