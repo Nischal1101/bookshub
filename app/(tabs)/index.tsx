@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  TouchableOpacity,
   FlatList,
   Alert,
   ActivityIndicator,
@@ -72,7 +71,13 @@ export default function Home() {
       fetchBooks();
     }
   }, [token]);
-
+  if (loading) {
+    return (
+      <View className="items-center justify-center h-full w-full">
+        <ActivityIndicator size="large" color="#4CAF50" />;
+      </View>
+    );
+  }
   const renderItem = ({ item }: { item: Book }) => <BookCard book={item} />;
 
   const handleLoadMore = async () => {
@@ -81,7 +86,7 @@ export default function Home() {
     }
   };
   return (
-    <View className="px-4 gap-2 mt-8 flex-1">
+    <View className="px-4 gap-2 mt-8 flex-1 ">
       <FlatList
         data={books}
         renderItem={renderItem}
@@ -101,15 +106,12 @@ export default function Home() {
         ListHeaderComponent={
           <View>
             <View className="flex-row justify-center gap-1">
-              <Text className="text-4xl text-primary ">BooksHub</Text>
+              <Text className="text-4xl text-primary">BooksHub</Text>
               <Ionicons size={34} name="glasses-outline" color="#4CAF50" />
             </View>
             <Text className="text-textSecondary mx-auto text-lg ">
               Discover great reads from the community.{" "}
             </Text>
-            <TouchableOpacity onPress={logout}>
-              <Text>Logout</Text>
-            </TouchableOpacity>
           </View>
         }
         ListEmptyComponent={

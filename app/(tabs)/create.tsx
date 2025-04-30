@@ -146,10 +146,10 @@ export default function Create() {
   };
   return (
     <KeyboardAvoidingView
-      className="flex-1 "
+      className="flex-1"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ScrollView>
+      <ScrollView className="">
         <View className="shadow-lg mx-4 px-4 py-5 rounded-2xl mt-8 bg-white">
           <View>
             <Text className="text-3xl font-bold text-textPrimary">

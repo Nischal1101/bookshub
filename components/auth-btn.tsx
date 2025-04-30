@@ -11,7 +11,7 @@ export default function AuthBtn({
   title: string | React.ReactNode;
   onPress: () => void;
   disabled?: boolean;
-  icon?: "cloud-upload-outline";
+  icon?: "cloud-upload-outline" | "log-out-outline";
 }) {
   return (
     <TouchableOpacity onPress={onPress} className="mt-3" disabled={disabled}>

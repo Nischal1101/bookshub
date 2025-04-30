@@ -3,9 +3,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LoginSchema } from "@/validators/loginSchema";
 
 interface User {
+  id: string;
   username: string;
   email: string;
   password: string;
+  profileImage: string;
+  createdAt: Date;
 }
 
 interface UserState {
