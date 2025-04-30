@@ -58,7 +58,7 @@ export default function Signup() {
             </Text>
           </View>
           <InputBox
-            title="Full Name"
+            title="UserName"
             type="text"
             placeholder="John Doe"
             icon="person-outline"
