@@ -23,6 +23,7 @@ export default function Home() {
         setLoading(true);
       }
 
+      console.log("api", process.env.EXPO_PUBLIC_API_URL);
       const response = await fetch(
         `${process.env.EXPO_PUBLIC_API_URL}/books?page=${pageNum}&limit=5`,
         {
@@ -61,7 +62,7 @@ export default function Home() {
   const renderItem = ({ item }: { item: Book }) => <BookCard book={item} />;
   const handleLoadMore = async () => {};
   return (
-    <View className="gap-2 mt-8 ">
+    <View className="gap-2 mt-8 flex-1">
       <View className="flex-row justify-center gap-1">
         <Text className="text-4xl text-primary ">BooksHub</Text>
 

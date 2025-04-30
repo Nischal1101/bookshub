@@ -37,7 +37,7 @@ export default function BookCard({ book }: { book: Book }) {
         </Text>
         <Text className="text-gray-600 mb-2">{book.caption}</Text>
         <Text className="text-xs text-gray-400 ">
-          {book.createdAt.toISOString()}
+          {new Date(book.createdAt).toLocaleDateString()}
         </Text>
       </View>
     </View>
