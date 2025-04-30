@@ -1,4 +1,12 @@
-import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Alert,
+  ActivityIndicator,
+  RefreshControl,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import BookCard from "@/components/book-card";
@@ -11,7 +19,7 @@ export default function Home() {
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
-  const { token, logout, checkAuth } = useAuthStore();
+  const { token, logout } = useAuthStore();
 
   const fetchBooks = async (pageNum = 1, refresh = false) => {
     setLoading(false);
@@ -22,10 +30,8 @@ export default function Home() {
       } else if (pageNum === 1) {
         setLoading(true);
       }
-
-      console.log("api", process.env.EXPO_PUBLIC_API_URL);
       const response = await fetch(
-        `${process.env.EXPO_PUBLIC_API_URL}/books?page=${pageNum}&limit=5`,
+        `${process.env.EXPO_PUBLIC_API_URL}/books?page=${pageNum}&limit=2`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -69,27 +75,53 @@ export default function Home() {
 
   const renderItem = ({ item }: { item: Book }) => <BookCard book={item} />;
 
-  const handleLoadMore = async () => {};
+  const handleLoadMore = async () => {
+    if (hasMore && !loading && !refreshing) {
+      fetchBooks(page + 1);
+    }
+  };
   return (
     <View className="px-4 gap-2 mt-8 flex-1">
-      <View className="flex-row justify-center gap-1">
-        <Text className="text-4xl text-primary ">BooksHub</Text>
-
-        <Ionicons size={34} name="glasses-outline" color="#4CAF50" />
-      </View>
-      <Text className="text-textSecondary mx-auto text-lg ">
-        Discover great reads from the community.{" "}
-      </Text>
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
       <FlatList
         data={books}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
         className="gap-2"
-        // contentContainerStyle={}
         showsVerticalScrollIndicator={false}
+        onEndReachedThreshold={0.1}
+        onEndReached={handleLoadMore}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => fetchBooks(1, true)}
+            className="text-primary"
+            tintColor={"#4CAF50"}
+          />
+        }
+        ListHeaderComponent={
+          <View>
+            <View className="flex-row justify-center gap-1">
+              <Text className="text-4xl text-primary ">BooksHub</Text>
+              <Ionicons size={34} name="glasses-outline" color="#4CAF50" />
+            </View>
+            <Text className="text-textSecondary mx-auto text-lg ">
+              Discover great reads from the community.{" "}
+            </Text>
+            <TouchableOpacity onPress={logout}>
+              <Text>Logout</Text>
+            </TouchableOpacity>
+          </View>
+        }
+        ListEmptyComponent={
+          <View className="flex-1 items-center justify-center">
+            <Text className="text-lg text-gray-500">No books found.</Text>
+          </View>
+        }
+        ListFooterComponent={
+          hasMore && books.length > 0 ? (
+            <ActivityIndicator size="small" className="text-primary" />
+          ) : null
+        }
       />
     </View>
   );
