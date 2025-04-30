@@ -16,7 +16,7 @@ export default function AuthBtn({
   return (
     <TouchableOpacity onPress={onPress} className="mt-3" disabled={disabled}>
       <View className="w-full bg-primary rounded-xl py-3 flex-row items-center justify-center">
-        {icon && (
+        {icon && !disabled && (
           <Ionicons name={icon} size={24} className="mr-2" color="#fff" />
         )}
         {disabled ? (
